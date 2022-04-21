@@ -6,18 +6,19 @@
  * @return {function}
  */
 function throttle(func, delay) {
-  let timer = null;
-  return function (...arg) {
-    if (!timer) {
-      timer = setTimeout(() => {
-        func.apply(this, arg);
-        timer = null;
-      }, delay);
-    }
-  };
+	let timer = null;
+	return function (...arg) {
+		if (!timer) {
+			timer = setTimeout(() => {
+				clearTimeout(timer);
+				func.apply(this, arg);
+				timer = null;
+			}, delay);
+		}
+	};
 }
 
 let scrollHandler = throttle(function (e) {
-  console.log(e);
+	console.log(e);
 }, 500);
 window.onscroll = scrollHandler;

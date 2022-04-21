@@ -2,13 +2,13 @@
 
 // 基础版本1
 function debounce_base(fn, wait = 300) {
-  let timer = null;
-  return function () {
-    if (timer !== null) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(fn, wait);
-  };
+	let timer = null;
+	return function () {
+		if (timer !== null) {
+			clearTimeout(timer);
+		}
+		timer = setTimeout(fn, wait);
+	};
 }
 
 /**
@@ -20,21 +20,30 @@ function debounce_base(fn, wait = 300) {
 
 // 改进版本
 function debounce(func, wait = 300, immediate = false) {
-  let timer, ctx;
-  let later = (arg) =>
-    setTimeout(() => {
-      func.apply(ctx, arg);
-      timer = ctx = null;
-    }, wait);
-  return function (...arg) {
-    if (!timer) {
-      timer = later(...arg);
-      ctx = this;
-      if (immediate) {
-        func.apply(this, arg);
-      } else {
-        clearTimeout(timer);
-      }
-    }
-  };
+	let timer;
+	return function (...arg) {
+		if (!timer) {
+			timer = setTimeout(() => {
+				clearTimeout(timer);
+				func.apply(this, arg);
+				timer = null;
+			}, wait);
+		}
+		if (immediate) {
+			func.apply(this, arg);
+		} else {
+			clearTimeout(timer);
+		}
+	};
 }
+
+document.getElementById('test').addEventListener(
+	'click',
+	debounce(
+		function (event) {
+			console.log(this, event);
+		},
+		3000,
+		true
+	)
+);

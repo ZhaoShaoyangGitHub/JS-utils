@@ -1,80 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      :root {
-        --main-color: #06c;
-        --accent-color: #999;
-      }
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			:root {
+				--main-color: #06c;
+				--accent-color: #999;
+			}
 
-      h1,
-      h2,
-      h3,
-      a {
-        color: var(--main-color);
-      }
-      a[href]:not([class]),
-      p,
-      footer span {
-        color: var(--accent-color);
-      }
-      .container {
-        height: 0;
-        padding-bottom: 20%;
-        position: relative;
-      }
-      .container div {
-        border: 2px dashed #ddd;
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-      }
-      img {
-        display: block;
-        font-family: Helvetica, Arial, sans-serif;
-        font-weight: 300;
-        height: auto;
-        line-height: 2;
-        position: relative;
-        text-align: center;
-        width: 100%;
-      }
-      img:before {
-        content: "We're sorry, the image below is missing :(";
-        display: block;
-        margin-bottom: 10px;
-      }
-      img:after {
-        content: "(url: " attr(src) ")";
-        display: block;
-        font-size: 12px;
-      }
-      a[href^="http"]:empty::before {
-        content: attr(href);
-      }
-    </style>
-  </head>
-  <body style="height: 300vh;">
-    <h1>h1</h1>
-    <h2>h2</h2>
-    <h3>h3</h3>
-    <a href="http://baidu.com"></a>
-    <a href="/" class="link">测试链接class</a>
-    <p>ppppppp</p>
-    <footer>
-      <span>footer-span</span>
-    </footer>
-    <img src="/" />
-    <div class="container">
-      <div></div>
-    </div>
-    <script src="./throttle.js"></script>
-    <script src="./isPcBrowser.js"></script>
-    <script src="./webPerFormance.js"></script>
-  </body>
+			h1,
+			h2,
+			h3,
+			a {
+				color: var(--main-color);
+			}
+			a[href]:not([class]),
+			p,
+			footer span {
+				color: var(--accent-color);
+			}
+			.container {
+				height: 0;
+				padding-bottom: 20%;
+				position: relative;
+			}
+			.container div {
+				border: 2px dashed #ddd;
+				height: 100%;
+				left: 0;
+				position: absolute;
+				top: 0;
+				width: 100%;
+			}
+			img {
+				display: block;
+				font-family: Helvetica, Arial, sans-serif;
+				font-weight: 300;
+				height: auto;
+				line-height: 2;
+				position: relative;
+				text-align: center;
+				width: 100%;
+			}
+			img:before {
+				content: "We're sorry, the image below is missing :(";
+				display: block;
+				margin-bottom: 10px;
+			}
+			img:after {
+				content: '(url: ' attr(src) ')';
+				display: block;
+				font-size: 12px;
+			}
+			a[href^='http']:empty::before {
+				content: attr(href);
+			}
+		</style>
+	</head>
+	<body style="height: 300vh">
+		<h1>h1</h1>
+		<h2>h2</h2>
+		<h3>h3</h3>
+		<a href="http://baidu.com"></a>
+		<a href="/" class="link">测试链接class</a>
+		<p>ppppppp</p>
+		<button id="test">防抖</button>
+		<footer>
+			<span>footer-span</span>
+		</footer>
+		<img src="/" />
+		<div class="container">
+			<div></div>
+		</div>
+		<script src="./debounce.js"></script>
+		<script src="./deepClone.js"></script>
+		<script src="./webPerFormance.js"></script>
+	</body>
 </html>
