@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			console.log("script start");
+			async function async1() {
+				await async2();
+				console.log("async1 end");
+			}
+			async function async2() {
+				console.log("async2 start");
+				return Promise.resolve()
+					.then(() => {
+						console.log("async2 end1");
+					})
+					.then(() => {
+						console.log("async2 end2");
+					}); //这里有两次轮询
+			}
+			async1();
+			// async2().then(() => {
+			// 	console.log("async2 end2");
+			// });
+			setTimeout(function () {
+				console.log("setTimeout");
+			});
+			new Promise((resolve) => {
+				console.log("promise");
+				resolve();
+			})
+				.then((res) => {
+					console.log("promise1");
+				})
+				.then((res) => {
+					console.log("promise2");
+				})
+				.then((res) => {
+					console.log("promise3");
+				});
+
+			let thenable = {
+				then: function (resolve, reject) {
+					console.log("thenable");
+					resolve(42);
+				},
+			};
+
+			let p1 = Promise.resolve(thenable);
+			p1.then(function (value) {
+				console.log(value); // 42
+			});
+
+			console.log("script end");
+			// script start
+			// async2 start
+			// promise
+			// script end
+			// async2 end
+			// promise1
+			// promise2
+			// async1 end
+			// setTimeout
+		</script>
+	</body>
+</html>
